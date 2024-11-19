@@ -2,7 +2,9 @@ package com.andrezktt.event_system.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -11,8 +13,12 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Activity> activities = new HashSet<>();
 
     public Category() {
     }
@@ -36,6 +42,10 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
     }
 
     @Override

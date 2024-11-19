@@ -21,6 +21,10 @@ public class Activity {
     @ManyToMany(mappedBy = "activities")
     private Set<Attender> attenders = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Activity() {
     }
 

@@ -25,6 +25,9 @@ public class Activity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "activity")
+    private Set<Block> blocks = new HashSet<>();
+
     public Activity() {
     }
 
@@ -69,6 +72,14 @@ public class Activity {
 
     public Set<Attender> getAttenders() {
         return attenders;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Set<Block> getBlocks() {
+        return blocks;
     }
 
     @Override

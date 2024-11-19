@@ -2,7 +2,9 @@ package com.andrezktt.event_system.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_attender")
@@ -13,6 +15,12 @@ public class Attender {
     private Integer id;
     private String name;
     private String email;
+
+    @ManyToMany
+    @JoinTable(name = "tb_attender_activity",
+            joinColumns = @JoinColumn(name = "attender_id"),
+            inverseJoinColumns = @JoinColumn(name = "activity_id"))
+    private Set<Activity> activities = new HashSet<>();
 
     public Attender() {
     }
@@ -45,6 +53,10 @@ public class Attender {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
     }
 
     @Override
